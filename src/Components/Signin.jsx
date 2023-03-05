@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Signin = () => {
-  return (
-    <main>Signin</main>
-  )
-}
+  return <main></main>;
+};
 
-export default Signin
+export default Signin;
