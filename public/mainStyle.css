@@ -6,3 +6,16 @@
 .-m-100 {
     margin: -60%;
 }
+
+.scroll_bar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.scroll_bar::-webkit-scrollbar-track {
+    background: rgb(15, 23, 42);
+}
+
+.scroll_bar::-webkit-scrollbar-thumb {
+    background-color: rgb(30, 172, 254);
+    border-radius: 5rem;
+}
