@@ -6,26 +6,30 @@ import {
   FaRegPaperPlane,
 } from "react-icons/fa";
 import { useState } from "react";
+import getContent from "../controllers/getContent";
 
 const Scrape = () => {
   const [file, setFile] = useState("");
   const [error, setError] = useState(null);
-
-  const handleUpload = (event) => {
+  const [image, setImage] = useState(null);
+  const handleUpload = async (event) => {
     const extname = event.target.files[0].name.split(".")[1];
 
     if (extname === "jpg" || extname === "jpeg" || extname === "png") {
       setError(null);
       const fname = event.target.files[0].name;
       console.log(fname);
-      if (fname) setFile(fname);
+      if (fname) {
+        setFile(fname);
+        setImage(event.target.files[0]);
+      }
     } else {
       setError("Invalid File");
       setFile("");
     }
   };
 
-  const handleDelete = async () => {
+  const handleDelete = () => {
     setFile("");
   };
 
@@ -35,8 +39,11 @@ const Scrape = () => {
         <button className="flex flex-row justify-center items-center flex-nowrap  mx-2 my-12 p-2 text-xl  w-24  max-h-9 bg-sky-300  rounded-sm text-slate-900 hover:scale-150 hover:-translate-y-4 transition-all hover:shadow-2xl hover:shadow-sky-500">
           <input
             type="file"
-            onChange={handleUpload}
+            onChange={(e) => {
+              handleUpload(e);
+            }}
             className="-m-100 opacity-0 "
+            name="image"
           />
           <FaPlusCircle className="flex-shrink-0" />
           Import
@@ -62,7 +69,12 @@ const Scrape = () => {
           )}
         </section>
       </section>
-      <button className="flex flex-row  h-auto w-auto p-3 m-5 bg-sky-700 hover:bg-sky-500 hover:-translate-y-3 transition-all delay-200 text-slate-900 text-xl justify-center items-center rounded-xl active:shadow-xl active:shadow-sky-600 animate-bounce hover:animate-none shadow-lg shadow-slate-900">
+      <button
+        className="flex flex-row  h-auto w-auto p-3 m-5 bg-sky-700 hover:bg-sky-500 hover:-translate-y-3 transition-all delay-200 text-slate-900 text-xl justify-center items-center rounded-xl active:shadow-xl active:shadow-sky-600 animate-bounce hover:animate-none shadow-lg shadow-slate-900"
+        onClick={() => {
+          getContent(image);
+        }}
+      >
         <h1>GO</h1>
         <FaRegPaperPlane className=" ml-4" />
       </button>

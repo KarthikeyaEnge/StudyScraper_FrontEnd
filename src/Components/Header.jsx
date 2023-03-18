@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="flex flex-row justify-between items-center bg-sky-500  min-w-full h-20 p-2 border-b-2 border-sky-800   sticky top-0">
+    <header className="flex flex-row justify-between items-center bg-gradient-to-r from-blue-500 to-sky-500   min-w-full h-20 p-2  sticky top-0">
       <Link to="/">
         <FaPlay className=" text-6xl text-slate-800  rounded-3xl p-1 bg-transparent border-slate-800 border-4 mx-4" />
       </Link>

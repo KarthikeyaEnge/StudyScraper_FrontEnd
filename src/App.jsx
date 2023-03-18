@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useRef, useEffect } from "react";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
@@ -6,7 +7,8 @@ import Layout from "./Components/Layout";
 import Scrape from "./Components/Scrape";
 import Invalid from "./Components/Invalid";
 import Home from "./Components/Home";
-
+import Results from "./Components/Results";
+import Loading from "./Components/Loading";
 function App() {
   const login = useRef(false);
   const [loggedIn, setLoggedIn] = useState(false);
@@ -16,17 +18,20 @@ function App() {
   return (
     <>
       <Header setLoggedIn={setLoggedIn} />
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          {/* Public Routes */}
-          <Route index element={<Home />} />
+      <React.Suspense fallback={<Loading />}>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            {/* Public Routes */}
+            <Route index element={<Home />} />
 
-          {/**Protected Routes */}
+            {/**Protected Routes */}
 
-          <Route path="scrape" element={<Scrape />} />
-          <Route path="*" element={<Invalid />} />
-        </Route>
-      </Routes>
+            <Route path="scrape" element={<Scrape />} />
+            <Route path="results" element={<Results />} />
+            <Route path="*" element={<Invalid />} />
+          </Route>
+        </Routes>
+      </React.Suspense>
       <Footer />
     </>
   );
