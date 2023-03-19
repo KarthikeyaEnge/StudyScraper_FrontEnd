@@ -5,13 +5,15 @@ import {
   FaFileImage,
   FaRegPaperPlane,
 } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import getContent from "../controllers/getContent";
 
-const Scrape = () => {
+const Scrape = ({ setResdata, resdata }) => {
   const [file, setFile] = useState("");
   const [error, setError] = useState(null);
   const [image, setImage] = useState(null);
+
   const handleUpload = async (event) => {
     const extname = event.target.files[0].name.split(".")[1];
 
@@ -33,7 +35,12 @@ const Scrape = () => {
     setFile("");
   };
 
-  return (
+  const handleResults = async () => {
+    const d = await getContent(image);
+    setResdata(d);
+  };
+
+  return resdata === null ? (
     <main className=" flex flex-col min-h-screen bg-slate-800 gap-4 py-3 items-center">
       <section className="flex flex-col items-center text-sky-700 text-3xl bg-slate-900  w-80 h-auto py-8 px-2 text-center rounded-2xl border-dashed border-4 border-sky-700 my-7">
         <button className="flex flex-row justify-center items-center flex-nowrap  mx-2 my-12 p-2 text-xl  w-24  max-h-9 bg-sky-300  rounded-sm text-slate-900 hover:scale-150 hover:-translate-y-4 transition-all hover:shadow-2xl hover:shadow-sky-500">
@@ -71,14 +78,14 @@ const Scrape = () => {
       </section>
       <button
         className="flex flex-row  h-auto w-auto p-3 m-5 bg-sky-700 hover:bg-sky-500 hover:-translate-y-3 transition-all delay-200 text-slate-900 text-xl justify-center items-center rounded-xl active:shadow-xl active:shadow-sky-600 animate-bounce hover:animate-none shadow-lg shadow-slate-900"
-        onClick={() => {
-          getContent(image);
-        }}
+        onClick={handleResults}
       >
         <h1>GO</h1>
         <FaRegPaperPlane className=" ml-4" />
       </button>
     </main>
+  ) : (
+    <Navigate to="/results" />
   );
 };
 

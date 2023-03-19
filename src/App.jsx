@@ -10,14 +10,11 @@ import Home from "./Components/Home";
 import Results from "./Components/Results";
 import Loading from "./Components/Loading";
 function App() {
-  const login = useRef(false);
-  const [loggedIn, setLoggedIn] = useState(false);
-  useEffect(() => {
-    login.current = loggedIn;
-  }, [loggedIn]);
+  const [resdata, setResdata] = useState(null);
+
   return (
     <>
-      <Header setLoggedIn={setLoggedIn} />
+      <Header />
       <React.Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -26,8 +23,11 @@ function App() {
 
             {/**Protected Routes */}
 
-            <Route path="scrape" element={<Scrape />} />
-            <Route path="results" element={<Results />} />
+            <Route
+              path="scrape"
+              element={<Scrape setResdata={setResdata} resdata={resdata} />}
+            />
+            <Route path="results" element={<Results list={resdata} />} />
             <Route path="*" element={<Invalid />} />
           </Route>
         </Routes>
