@@ -8,6 +8,7 @@ const getContent = async (image) => {
     "Content-Type": "multipart/form-data",
   });
   console.log(res.data);
+  return res.data;
 };
 
 export default getContent;
