@@ -4,6 +4,7 @@ import {
   FaTrash,
   FaFileImage,
   FaRegPaperPlane,
+  FaExclamationTriangle,
 } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
@@ -41,7 +42,7 @@ const Scrape = ({ setResdata, resdata }) => {
   };
 
   return resdata === null ? (
-    <main className=" flex flex-col min-h-screen bg-slate-800 gap-4 py-3 items-center">
+    <main className=" flex flex-col min-h-screen bg-slate-800 gap-4  pt-3 items-center">
       <section className="flex flex-col items-center text-sky-700 text-3xl bg-slate-900  w-80 h-auto py-8 px-2 text-center rounded-2xl border-dashed border-4 border-sky-700 my-7">
         <button className="flex flex-row justify-center items-center flex-nowrap  mx-2 my-12 p-2 text-xl  w-24  max-h-9 bg-sky-300  rounded-sm text-slate-900 hover:scale-150 hover:-translate-y-4 transition-all hover:shadow-2xl hover:shadow-sky-500">
           <input
@@ -83,6 +84,22 @@ const Scrape = ({ setResdata, resdata }) => {
         <h1>GO</h1>
         <FaRegPaperPlane className=" ml-4" />
       </button>
+
+      <ul className=" w-80 morp rounded-xl text-lg text-indigo-300 p-2 text-center">
+        <h1 className="flex flex-row flex-nowrap text-2xl gap-2 items-center justify-center p-2 text-indigo-300 w-full border-b-2 border-indigo-300">
+          <FaExclamationTriangle />
+          Limitations
+        </h1>
+
+        <li> Size of the image must be less than 1024KB</li>
+      </ul>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path
+          fill="#0099ff"
+          fill-opacity="1"
+          d="M0,160L21.8,165.3C43.6,171,87,181,131,197.3C174.5,213,218,235,262,234.7C305.5,235,349,213,393,208C436.4,203,480,213,524,197.3C567.3,181,611,139,655,133.3C698.2,128,742,160,785,197.3C829.1,235,873,277,916,282.7C960,288,1004,256,1047,245.3C1090.9,235,1135,245,1178,245.3C1221.8,245,1265,235,1309,197.3C1352.7,160,1396,96,1418,64L1440,32L1440,320L1418.2,320C1396.4,320,1353,320,1309,320C1265.5,320,1222,320,1178,320C1134.5,320,1091,320,1047,320C1003.6,320,960,320,916,320C872.7,320,829,320,785,320C741.8,320,698,320,655,320C610.9,320,567,320,524,320C480,320,436,320,393,320C349.1,320,305,320,262,320C218.2,320,175,320,131,320C87.3,320,44,320,22,320L0,320Z"
+        ></path>
+      </svg>
     </main>
   ) : (
     <Navigate to="/results" />

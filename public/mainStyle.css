@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Cinzel+Decorative:wght@700&family=Exo+2:wght@300&family=Manrope&family=Michroma&family=Nunito:wght@300&family=Orbitron&family=Philosopher&family=Prosto+One&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -18,4 +19,29 @@
 .scroll_bar::-webkit-scrollbar-thumb {
     background-color: rgb(30, 172, 254);
     border-radius: 5rem;
+}
+
+.font-michroma {
+    font-family: 'michroma';
+}
+
+.font-nunito {
+    font-family: 'nunito';
+}
+
+.font-exo {
+    font-family: 'exo 2';
+}
+
+.background_img {
+    background-image: url('../src/assets/ss-back.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.morp {
+    background: linear-gradient(145deg, #202c3f, #1b2535);
+    box-shadow: 16px 16px 32px #161e2b,
+        -16px -16px 32px #26344b;
 }
