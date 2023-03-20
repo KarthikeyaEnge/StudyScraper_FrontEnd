@@ -17,9 +17,10 @@
 }
 
 .scroll_bar::-webkit-scrollbar-thumb {
-    background-color: rgb(30, 172, 254);
+    background-color: #1eacfe;
     border-radius: 5rem;
 }
+
 
 .font-michroma {
     font-family: 'michroma';
@@ -44,4 +45,11 @@
     background: linear-gradient(145deg, #202c3f, #1b2535);
     box-shadow: 16px 16px 32px #161e2b,
         -16px -16px 32px #26344b;
+}
+
+.bgimg {
+    background-image: url('../src/assets/layerwave.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
