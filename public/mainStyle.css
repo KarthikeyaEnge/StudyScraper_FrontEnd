@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Cinzel+Decorative:wght@700&family=Exo+2:wght@300&family=Manrope&family=Michroma&family=Nunito:wght@300&family=Orbitron&family=Philosopher&family=Prosto+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Cinzel+Decorative:wght@700&family=Exo+2:wght@300&family=Manrope&family=Michroma&family=Nunito:wght@300&family=Orbitron&family=Outfit:wght@500&family=Philosopher&family=Prosto+One&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -34,6 +34,10 @@
     font-family: 'exo 2';
 }
 
+.font-outfit {
+    font-family: 'outfit', sans-serif;
+}
+
 .background_img {
     background-image: url('../src/assets/ss-back.jpg');
     background-repeat: no-repeat;
@@ -49,6 +53,17 @@
 
 .bgimg {
     background-image: url('../src/assets/layerwave.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.bg-footer {
+    background-color: #0099ff;
+}
+
+.bg-search {
+    background-image: url('../src/assets/searchbg.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

@@ -7,7 +7,7 @@ import Layout from "./Components/Layout";
 import Scrape from "./Components/Scrape";
 import Invalid from "./Components/Invalid";
 import Home from "./Components/Home";
-import Results from "./Components/Results";
+import ResultsX from "./Components/ResultsX";
 import Loading from "./Components/Loading";
 function App() {
   const [resdata, setResdata] = useState(null);
@@ -27,7 +27,7 @@ function App() {
               path="scrape"
               element={<Scrape setResdata={setResdata} resdata={resdata} />}
             />
-            <Route path="results" element={<Results list={resdata} />} />
+            <Route path="results" element={<ResultsX list={resdata} />} />
             <Route path="*" element={<Invalid />} />
           </Route>
         </Routes>

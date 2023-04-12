@@ -8,12 +8,14 @@ import {
 } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
+import Loading from "./Loading";
 import getContent from "../controllers/getContent";
 
 const Scrape = ({ setResdata, resdata }) => {
   const [file, setFile] = useState("");
   const [error, setError] = useState(null);
   const [image, setImage] = useState(null);
+  const [isloading, setIsloading] = useState(false);
 
   const handleUpload = async (event) => {
     const extname = event.target.files[0].name.split(".")[1];
@@ -37,11 +39,13 @@ const Scrape = ({ setResdata, resdata }) => {
   };
 
   const handleResults = async () => {
+    setIsloading(true);
     const d = await getContent(image);
     setResdata(d);
+    setIsloading(false);
   };
 
-  return resdata === null ? (
+  return !isloading && resdata === null ? (
     <main className=" flex flex-col min-h-screen bg-slate-800 gap-4  pt-3 items-center">
       <section className="flex flex-col items-center text-sky-700 text-3xl bg-slate-900  w-80 h-auto py-8 px-2 text-center rounded-2xl border-dashed border-4 border-sky-700 my-7">
         <button className="flex flex-row justify-center items-center flex-nowrap  mx-2 my-12 p-2 text-xl  w-24  max-h-9 bg-sky-300  rounded-sm text-slate-900 hover:scale-150 hover:-translate-y-4 transition-all hover:shadow-2xl hover:shadow-sky-500">
@@ -92,6 +96,7 @@ const Scrape = ({ setResdata, resdata }) => {
         </h1>
 
         <li> Size of the image must be less than 1024KB</li>
+        <li>Make Sure To Crop Unnecessary Information </li>
       </ul>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
         <path
@@ -101,6 +106,8 @@ const Scrape = ({ setResdata, resdata }) => {
         ></path>
       </svg>
     </main>
+  ) : isloading ? (
+    <Loading />
   ) : (
     <Navigate to="/results" />
   );
