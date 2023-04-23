@@ -18,9 +18,9 @@ const Scrape = ({ setResdata, resdata }) => {
   const [isloading, setIsloading] = useState(false);
 
   const handleUpload = async (event) => {
-    const extname = event.target.files[0].name.split(".")[1];
+    const extname = event.target.files[0].name;
 
-    if (extname === "jpg" || extname === "jpeg" || extname === "png") {
+    if (extname.endsWith(".jpg") || extname.endsWith(".jpeg") || extname.endsWith(".png")) {
       setError(null);
       const fname = event.target.files[0].name;
       console.log(fname);
