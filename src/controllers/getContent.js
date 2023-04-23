@@ -5,7 +5,7 @@ const getContent = async (image) => {
   formData.append("image", image);
   formData.append("content-type", "image/jpeg");
   let res = await axios.post(
-    "https://mineskill-back.onrender.com:3500/datacall",
+    "https://mineskill-back.onrender.com/datacall",
     formData,
     {
       "Content-Type": "multipart/form-data",

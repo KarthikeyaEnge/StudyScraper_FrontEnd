@@ -9,7 +9,7 @@ const getVid = async (query, channelname, rated) => {
 
   //console.log(qdata);
   const data = await axios.post(
-    "https://mineskill-back.onrender.com:3500/videocall",
+    "https://mineskill-back.onrender.com/videocall",
     qdata
   );
   console.log(data.data.id);
