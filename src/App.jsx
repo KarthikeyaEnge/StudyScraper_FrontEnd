@@ -21,15 +21,13 @@ function App() {
             {/* Public Routes */}
             <Route index element={<Home />} />
 
-            {/**Protected Routes */}
-
             <Route
               path="scrape"
               element={<Scrape setResdata={setResdata} resdata={resdata} />}
             />
             <Route path="results" element={<ResultsX list={resdata} />} />
-            <Route path="*" element={<Invalid />} />
           </Route>
+          <Route path="*" element={<Invalid />} />
         </Routes>
       </React.Suspense>
       <Footer />
