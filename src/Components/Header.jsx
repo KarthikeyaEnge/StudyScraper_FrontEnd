@@ -1,5 +1,5 @@
 import React from "react";
-import { FaPlay } from "react-icons/fa";
+import { FaPlay, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Header = () => {
@@ -21,6 +21,12 @@ const Header = () => {
           className="hover:text-slate-800    transition-all mx-4 font-bold"
         >
           Scrape
+        </Link>
+        <Link
+          to="/login"
+          className="hover:text-slate-800    transition-all mx-4 font-bold"
+        >
+          <FaUser />
         </Link>
       </nav>
     </header>

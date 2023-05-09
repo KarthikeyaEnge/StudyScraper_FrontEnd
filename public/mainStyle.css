@@ -58,6 +58,13 @@
     background-position: center;
 }
 
+.bg-gif {
+    background-image: url('../src/assets/wave_motion.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 .bg-footer {
     background-color: #0099ff;
 }

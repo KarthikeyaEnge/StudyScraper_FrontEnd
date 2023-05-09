@@ -7,7 +7,7 @@ import {
   FaTrash,
   FaPlusSquare,
 } from "react-icons/fa";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import Invalid from "./Invalid";
 import Loading from "./Loading";
 import Search from "./Search";
@@ -62,7 +62,7 @@ const ResultsX = ({ list = null }) => {
   const channelname = useRef("");
   const [rated, setRated] = useState(false);
   const width = useRef(window.innerWidth);
-
+  const { subject } = useParams();
   useEffect(() => {
     width.current = window.innerWidth;
   }, [, window.innerWidth]);
@@ -78,9 +78,10 @@ const ResultsX = ({ list = null }) => {
 
   const handlevid = async (d, cn, r) => {
     setPlay(d);
+
     setIsloading(true);
     console.log(d);
-    const data = await getVid(d, cn, r);
+    const data = await getVid(subject + " " + d, cn, r);
     setVideo(data.id);
     setCon(data.content);
     setIsloading(false);

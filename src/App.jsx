@@ -9,6 +9,7 @@ import Invalid from "./Components/Invalid";
 import Home from "./Components/Home";
 import ResultsX from "./Components/ResultsX";
 import Loading from "./Components/Loading";
+import Loginx from "./Components/Loginx";
 function App() {
   const [resdata, setResdata] = useState(null);
 
@@ -20,12 +21,16 @@ function App() {
           <Route path="/" element={<Layout />}>
             {/* Public Routes */}
             <Route index element={<Home />} />
+            <Route path="login" element={<Loginx />} />
 
             <Route
               path="scrape"
               element={<Scrape setResdata={setResdata} resdata={resdata} />}
             />
-            <Route path="results" element={<ResultsX list={resdata} />} />
+            <Route
+              path="results/:subject"
+              element={<ResultsX list={resdata} />}
+            />
           </Route>
           <Route path="*" element={<Invalid />} />
         </Routes>
