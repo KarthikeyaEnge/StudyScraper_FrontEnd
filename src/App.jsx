@@ -10,6 +10,8 @@ import Home from "./Components/Home";
 import ResultsX from "./Components/ResultsX";
 import Loading from "./Components/Loading";
 import Loginx from "./Components/Loginx";
+import Profile from "./Components/Profile";
+import PersistAuth from "./Components/PersistAuth";
 function App() {
   const [resdata, setResdata] = useState(null);
 
@@ -29,8 +31,24 @@ function App() {
             />
             <Route
               path="results/:subject"
-              element={<ResultsX list={resdata} />}
+              element={
+                <ResultsX
+                  list={JSON.parse(sessionStorage.getItem("ocrres"))}
+                  setResdata={setResdata}
+                />
+              }
             />
+            {/* Presisted and protected route */}
+            <Route element={<PersistAuth />}>
+              <Route
+                path="profile"
+                element={
+                  <Profile
+                    userdata={JSON.parse(sessionStorage.getItem("userdata"))}
+                  />
+                }
+              />
+            </Route>
           </Route>
           <Route path="*" element={<Invalid />} />
         </Routes>

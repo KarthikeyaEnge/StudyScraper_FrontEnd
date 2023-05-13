@@ -1,8 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Cinzel+Decorative:wght@700&family=Exo+2:wght@300&family=Manrope&family=Michroma&family=Nunito:wght@300&family=Orbitron&family=Outfit:wght@500&family=Philosopher&family=Prosto+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Cinzel+Decorative:wght@700&family=Exo+2:wght@300&family=Manrope&family=Michroma&family=Nunito:wght@300&family=Orbitron&family=Outfit:wght@500&family=Philosopher&family=Prosto+One&family=Sora:wght@300&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+input[type="text"]:focus~.input-text,
+input[type="text"]:not(:placeholder-shown)~.input-text {
+    @apply text-blue-500 transform -translate-y-4 -translate-x-5 scale-75 bg-slate-900;
+}
 
 .-m-100 {
     margin: -60%;
@@ -28,6 +33,10 @@
 
 .font-nunito {
     font-family: 'nunito';
+}
+
+.font-sora {
+    font-family: 'Sora';
 }
 
 .font-exo {

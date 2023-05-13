@@ -13,6 +13,7 @@ import Loading from "./Loading";
 import Search from "./Search";
 import YouTube from "react-youtube";
 import getVid from "../controllers/getVid";
+import axios from "axios";
 
 //sample data received from the server.
 /* let listx = {
@@ -80,8 +81,7 @@ const ResultsX = ({ list = null }) => {
     setPlay(d);
 
     setIsloading(true);
-    console.log(d);
-    const data = await getVid(subject + " " + d, cn, r);
+    const data = await getVid({ subject: subject, q: d }, cn, r);
     setVideo(data.id);
     setCon(data.content);
     setIsloading(false);
@@ -95,6 +95,24 @@ const ResultsX = ({ list = null }) => {
   const handlecheckdelete = (id) => {
     const otherele = results.filter((items) => items.id !== id);
     setResults([...otherele]);
+  };
+
+  const handlesave = async (e) => {
+    e.preventDefault();
+    const srcdata = JSON.parse(sessionStorage.getItem("ocrres"));
+    const userName = sessionStorage.getItem("user");
+    const data = {
+      user: userName,
+      srcdata: srcdata.concepts,
+      subject: sessionStorage.getItem("subject"),
+    };
+    console.log(data);
+    try {
+      const res = await axios.post("http://localhost:3500/users/adddata", data);
+      console.log(res.data);
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 
   const handleAddextra = () => {
@@ -200,6 +218,15 @@ const ResultsX = ({ list = null }) => {
             />{" "}
             <label>Most Watched</label>
           </div>
+
+          {sessionStorage.getItem("user") && (
+            <button
+              className="p-2 mr-5 text-xl font-nunito font-bold bg-sky-500 text-slate-900 rounded-xl my-1 shadow-md shadow-slate-950 "
+              onClick={(e) => handlesave(e)}
+            >
+              Save
+            </button>
+          )}
         </nav>
 
         <section className=" min-h-full">
@@ -212,7 +239,7 @@ const ResultsX = ({ list = null }) => {
                 className="lg:w-auto lg:h-auto rounded-xl border-2 border-sky-800 overflow-hidden shadow-lg shadow-black"
               />
 
-              {con.intro && (
+              {con && con.intro && (
                 <>
                   <h2 className="text-2xl text-sky-600 font-outfit underline mt-2">
                     Introduction
@@ -220,7 +247,7 @@ const ResultsX = ({ list = null }) => {
                   <p className="text-white font-nunito p-2 m-2">{con.intro}</p>
                 </>
               )}
-              {con.fullurl && (
+              {con && con.fullurl && (
                 <a href={con.fullurl} target="_blank">
                   <button className="font-outfit text-xl bg-sky-600 hover:bg-sky-500 px-2 py-1 rounded-lg">
                     Need-more?
@@ -228,7 +255,7 @@ const ResultsX = ({ list = null }) => {
                 </a>
               )}
 
-              {con.ref && (
+              {con && con.ref && (
                 <section className="flex flex-col justify-center items-center rounded-lg border-2 border-sky-500 mx-3 my-4">
                   <h1 className="text-sky-600 underline text-xl">References</h1>
                   <ul className="text-center h-96 lg:w-auto w-80 p-2 overflow-y-scroll scroll_bar overflow-x-hidden">

@@ -43,14 +43,20 @@ const Scrape = ({ setResdata, resdata }) => {
     setFile("");
   };
 
+  /*   useEffect(() => {
+    sessionStorage.setItem("subject", subject);
+  }, [subject]); */
+
   const handleResults = async () => {
     setIsloading(true);
+    sessionStorage.setItem("subject", subject);
     const d = await getContent(image);
     setResdata(d);
+    sessionStorage.setItem("ocrres", JSON.stringify(d));
     setIsloading(false);
   };
 
-  return !isloading && resdata === null ? (
+  return !isloading && sessionStorage.getItem("ocrres") === null ? (
     <main className=" flex flex-col min-h-screen bg-slate-800 gap-4  pt-3 items-center">
       <section className="font-mono font-extrabold flex flex-row items-center justify-center p-1 bg-slate-900 text-[#E1E4E7] rounded-xl">
         <label className="relative cursor-pointer">
@@ -60,9 +66,9 @@ const Scrape = ({ setResdata, resdata }) => {
             className="h-10 w-30 px-4 py-4 text-xl text-white bg-black border-white border-2 rounded-lg border-opacity-50 outline-none focus:border-blue-500 placeholder-gray-300 placeholder-opacity-0 transition duration-200"
             onChange={(e) => setSubject(e.target.value)}
           />
-          {/*  <span className="text-xl text-white text-opacity-80 bg-black absolute left-4 top-1 px-1 transition duration-200 input-text">
+          <span className="text-xl text-white text-opacity-80 bg-black absolute left-4 top-1 px-1 transition duration-200 input-text">
             Subject
-          </span> */}
+          </span>
         </label>
       </section>
       <section className="flex flex-col items-center text-sky-700 text-3xl bg-slate-900  w-80 h-auto py-8 px-2 text-center rounded-2xl border-dashed border-4 border-sky-700 my-7">
@@ -127,7 +133,7 @@ const Scrape = ({ setResdata, resdata }) => {
   ) : isloading ? (
     <Loading />
   ) : (
-    <Navigate to={`/results/${subject}`} />
+    <Navigate to={`/results/${sessionStorage.getItem("subject")}`} />
   );
 };
 

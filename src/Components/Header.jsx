@@ -9,7 +9,7 @@ const Header = () => {
         <FaPlay className=" text-6xl text-slate-800  rounded-3xl p-1 bg-transparent border-slate-800 border-4 mx-4" />
       </Link>
 
-      <nav className=" flex flex-row justify-between items-center mx-2 text-xl gap-3 text-slate-300">
+      <nav className=" flex flex-row justify-between items-center mx-1 text-xl gap-3 text-slate-300">
         <Link
           to="/"
           className="hover:text-slate-800    transition-all mx-4 font-bold"
