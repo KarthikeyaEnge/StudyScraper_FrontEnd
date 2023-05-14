@@ -31,6 +31,7 @@ const Profile = () => {
     sessionStorage.removeItem("user");
     sessionStorage.removeItem("pass");
     sessionStorage.removeItem("userdata");
+    sessionStorage.removeItem("ocrres");
     window.location.reload();
   };
 
@@ -68,19 +69,24 @@ const Profile = () => {
             <img
               src={avatar}
               alt="avatar"
-              className=" w-72  h-64 rounded-full self-center xl:-mt-24 "
+              className=" hidden xl:block xl:w-72  xl:h-64 rounded-full self-center xl:-mt-24 "
             />
           </div>
 
-          <section className="w-full flex justify-center mt-8">
+          <section className="w-full flex flex-col justify-center items-center mt-8">
+            <img
+              src={avatar}
+              alt="avatar"
+              className=" xl:hidden rounded-full self-center w-28 h-28 z-10"
+            />
             <form
               action=""
-              className="bg-[#4a567ea9] w-1/2 h-auto p-3 rounded-3xl"
+              className="bg-[#4a567ea9] xl:w-1/2 w-80 h-auto p-3 rounded-3xl -mt-5"
             >
-              <div className="mx-2 my-3 flex flex-row flex-nowrap flex-shrink justify-evenly">
+              <div className="mx-2 mt-5 flex flex-row flex-nowrap flex-shrink justify-evenly items-center">
                 <label
                   htmlFor="username"
-                  className="font-sora text-3xl text-slate-200 "
+                  className="font-sora xl:text-3xl text-xl text-slate-200 "
                 >
                   Username
                 </label>
@@ -91,10 +97,10 @@ const Profile = () => {
                   value={userdata.user}
                 />
               </div>
-              <div className="mx-2 my-3 flex flex-row flex-nowrap flex-shrink justify-evenly">
+              <div className="mx-2 mt-5 flex flex-row flex-nowrap flex-shrink justify-evenly items-center">
                 <label
                   htmlFor="pass"
-                  className="font-sora text-3xl text-slate-200"
+                  className="font-sora xl:text-3xl text-xl text-slate-200"
                 >
                   Password
                 </label>
@@ -148,7 +154,7 @@ const Profile = () => {
             </ul>
           </section>
 
-          <section className="self-center w-1/2 bg-[#dbaaaa7e] border border-[#f87373] p-3 rounded-2xl backdrop-opacity-10 text-white my-3">
+          <section className="self-center xl:w-1/2 w-80 bg-[#dbaaaa7e] border border-[#f87373] p-3 rounded-2xl backdrop-opacity-10 text-white my-3">
             <div className="flex flex-row flex-wrap justify-center items-center gap-3">
               <h1 className="text-red-500 ">❗Warning</h1>
               <h1>Careful your account will be deleted</h1>

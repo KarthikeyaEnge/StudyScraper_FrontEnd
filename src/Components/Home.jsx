@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <main className=" min-h-screen bg-slate-800 overflow-x-hidden">
-      <div className="flex flex-col h-screen items-center justify-center flex-nowrap bg-gif z-50">
+      <div className="flex flex-col h-screen items-center justify-center flex-nowrap bgimg z-50">
         <h1 className="xl:text-7xl lg:text-6xl text-4xl bg-gradient-to-r from-blue-500 via-indigo-500 to-sky-500 bg-clip-text text-transparent font-michroma font-bold mb-10 -mt-5 mx-2 z-50 ">
           MINE SKILL
         </h1>
@@ -31,9 +31,11 @@ const Home = () => {
                 Let's Do This!
               </button>
             </Link>
-            <button className="hover:bg-sky-500 transition-all delay-200 bg-white text-gray-800 font-bold rounded-full  lg:py-4 lg:px-8 py-2 px-4  hover:outline-4 hover:outline-sky-300 hover:outline">
-              Instructions
-            </button>
+            <Link to="/instructions">
+              <button className="hover:bg-sky-500 transition-all delay-200 bg-white text-gray-800 font-bold rounded-full  lg:py-4 lg:px-8 py-2 px-4  hover:outline-4 hover:outline-sky-300 hover:outline">
+                Instructions
+              </button>
+            </Link>
           </div>
         </div>
       </div>

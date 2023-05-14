@@ -106,6 +106,7 @@ const ResultsX = ({ list = null }) => {
     e.preventDefault();
     const srcdata = JSON.parse(sessionStorage.getItem("ocrres"));
     const userName = sessionStorage.getItem("user");
+
     const data = {
       user: userName,
       srcdata: srcdata.concepts,
@@ -118,6 +119,11 @@ const ResultsX = ({ list = null }) => {
     } catch (err) {
       console.error(err.message);
     }
+  };
+
+  const handlenew = async (e) => {
+    sessionStorage.removeItem("ocrres");
+    window.location.reload();
   };
 
   const handleAddextra = () => {
@@ -147,7 +153,7 @@ const ResultsX = ({ list = null }) => {
 
   return list ? (
     <main className=" min-h-screen lg:grid lg:grid-cols-4 bg-slate-900">
-      <section className="lg:max-h-fit bg-slate-900 lg:col-span-1 lg:overflow-y-scroll  lg:overflow-x-hidden text-center py-1 items-center flex flex-col scroll_bar">
+      <section className="lg:max-h-fit bg-slate-900 lg:col-span-1 h-screen overflow-y-scroll  lg:overflow-x-hidden text-center py-1 items-center flex flex-col scroll_bar">
         <div className="flex flex-nowrap flex-row w-3/4 justify-between items-center my-3">
           <h3 className="text-lg text-sky-400 font-bold">Results</h3>
           <button
@@ -241,6 +247,12 @@ const ResultsX = ({ list = null }) => {
               Save
             </button>
           )}
+          <button
+            className="p-2 mr-5 text-xl font-nunito font-bold bg-sky-500 text-slate-900 rounded-xl my-1 shadow-md shadow-slate-950 "
+            onClick={(e) => handlenew(e)}
+          >
+            New
+          </button>
         </nav>
 
         <section className=" min-h-full">
@@ -298,7 +310,7 @@ const ResultsX = ({ list = null }) => {
       </section>
     </main>
   ) : (
-    <Navigate to="/invalid" />
+    <Navigate to="/scrape" />
   );
 };
 

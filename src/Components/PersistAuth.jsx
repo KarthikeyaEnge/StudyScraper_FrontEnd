@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { Outlet } from "react-router";
 import { useAuth } from "../Context/AuthProvider";
 import CryptoJS from "crypto-js";
 import { Navigate } from "react-router";
 import axios from "axios";
+import Loading from "./Loading";
+import Layout from "./Layout";
 
 const PersistAuth = () => {
   const { usr, setUsr, setUserdata } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     if (sessionStorage.getItem("user")) {
       const reqdata = {
         UserName: sessionStorage.getItem("user"),
@@ -28,14 +32,16 @@ const PersistAuth = () => {
           user: sessionStorage.getItem("user"),
         })
         .then((res) => {
-          sessionStorage.removeItem("userdata");
+          //sessionStorage.removeItem("userdata");
           sessionStorage.setItem("userdata", JSON.stringify(res.data));
           setUserdata(res.data);
         });
+      setLoading(false);
     }
+    setLoading(false);
   }, []);
 
-  return usr ? <Outlet /> : <Navigate to="/login" />;
+  return loading ? <Loading /> : usr ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default PersistAuth;

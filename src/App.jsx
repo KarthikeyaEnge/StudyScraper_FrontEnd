@@ -12,6 +12,7 @@ import Loading from "./Components/Loading";
 import Loginx from "./Components/Loginx";
 import Profile from "./Components/Profile";
 import PersistAuth from "./Components/PersistAuth";
+import Instruct from "./Components/Instruct";
 function App() {
   const [resdata, setResdata] = useState(null);
 
@@ -24,7 +25,7 @@ function App() {
             {/* Public Routes */}
             <Route index element={<Home />} />
             <Route path="login" element={<Loginx />} />
-
+            <Route path="instructions" element={<Instruct />} />
             <Route
               path="scrape"
               element={<Scrape setResdata={setResdata} resdata={resdata} />}
@@ -38,6 +39,7 @@ function App() {
                 />
               }
             />
+
             {/* Presisted and protected route */}
             <Route element={<PersistAuth />}>
               <Route
