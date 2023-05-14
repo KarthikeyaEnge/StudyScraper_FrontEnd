@@ -79,7 +79,7 @@ const ResultsX = ({ list = null }) => {
 
   const handlevid = async (d, cn, r) => {
     setPlay(d);
-
+    console.log({ subject: subject, q: d });
     setIsloading(true);
     const data = await getVid({ subject: subject, q: d }, cn, r);
     setVideo(data.id);
@@ -95,6 +95,11 @@ const ResultsX = ({ list = null }) => {
   const handlecheckdelete = (id) => {
     const otherele = results.filter((items) => items.id !== id);
     setResults([...otherele]);
+    const ocrdata = JSON.parse(sessionStorage.getItem("ocrres"));
+    ocrdata["concepts"] = [...otherele];
+    console.log(ocrdata);
+    sessionStorage.setItem("ocrres", JSON.stringify(ocrdata));
+    window.location.reload();
   };
 
   const handlesave = async (e) => {
@@ -116,14 +121,23 @@ const ResultsX = ({ list = null }) => {
   };
 
   const handleAddextra = () => {
-    const extraobj = {
-      id: results.length + 1,
-      concept: extraadd.current.value,
-      checked: true,
-    };
+    if (
+      extraadd.current.value !== null ||
+      extraadd.current.value !== undefined
+    ) {
+      const extraobj = {
+        id: results.length + 1,
+        concept: extraadd.current.value,
+        checked: true,
+      };
 
-    extraadd.current.value = "";
-    setResults([extraobj, ...results]);
+      extraadd.current.value = "";
+
+      setResults([extraobj, ...results]);
+      const ocrdata = JSON.parse(sessionStorage.getItem("ocrres"));
+      ocrdata["concepts"] = [extraobj, ...results];
+      sessionStorage.setItem("ocrres", JSON.stringify(ocrdata));
+    }
   };
 
   const vopts = {

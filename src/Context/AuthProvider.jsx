@@ -7,8 +7,9 @@ const useAuth = () => {
 };
 const AuthProvider = ({ children }) => {
   const [usr, setUsr] = useState("");
+  const [userdata, setUserdata] = useState();
   return (
-    <AuthContext.Provider value={{ usr, setUsr }}>
+    <AuthContext.Provider value={{ usr, setUsr, userdata, setUserdata }}>
       {children}
     </AuthContext.Provider>
   );

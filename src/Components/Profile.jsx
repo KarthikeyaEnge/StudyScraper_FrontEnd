@@ -12,8 +12,8 @@ const items = [
   { id: "4", topic: "Physics" },
 ];
 
-const Profile = ({ userdata }) => {
-  const { usr, setUsr } = useAuth();
+const Profile = () => {
+  const { usr, setUsr, userdata } = useAuth();
   const [pass, setPass] = useState();
   const [loading, setLoading] = useState(false);
 
@@ -24,15 +24,24 @@ const Profile = ({ userdata }) => {
         import.meta.env.VITE_PASS_KEY
       ).toString(CryptoJS.enc.Utf8)
     );
-
-    console.log(Object.keys(userdata.src));
   }, []);
 
   const handlelogout = async (e) => {
     e.preventDefault();
     sessionStorage.removeItem("user");
     sessionStorage.removeItem("pass");
+    sessionStorage.removeItem("userdata");
     window.location.reload();
+  };
+
+  const handlehist = async (e, d, s) => {
+    e.preventDefault();
+    console.log(d);
+    const data = {
+      concepts: d,
+    };
+    sessionStorage.setItem("ocrres", JSON.stringify(data));
+    sessionStorage.setItem("subject", s);
   };
 
   return (
@@ -114,21 +123,28 @@ const Profile = ({ userdata }) => {
             </h1>
 
             <ul>
-              {Object.keys(userdata.src).map(
-                (item) =>
-                  item !== "undefined" && (
-                    <li
-                      key={item}
-                      className="w-full bg-[#051F3E] font-sora p-4 flex flex-row flex-nowrap text-white font-2xl justify-between items-center my-3 mx-1 rounded-full shadow-md shadow-slate-950"
-                    >
-                      <div className="flex flex-row gap-3">
-                        <h1>Subject</h1>{" "}
-                        <h1 className="text-sky-500 font-bold">{item}</h1>
-                      </div>
-                      <button>More details🔽</button>
-                    </li>
-                  )
-              )}
+              {userdata.src &&
+                Object.keys(userdata.src).map(
+                  (item) =>
+                    item !== "undefined" && (
+                      <li
+                        key={item}
+                        className="w-full bg-[#051F3E] font-sora p-4 flex flex-row flex-nowrap text-white font-2xl justify-between items-center my-3 mx-1 rounded-full shadow-md shadow-slate-950"
+                      >
+                        <div className="flex flex-row gap-3">
+                          <h1>Subject</h1>{" "}
+                          <h1 className="text-sky-500 font-bold">{item}</h1>
+                        </div>
+                        <button
+                          onClick={(e) =>
+                            handlehist(e, userdata.src[item], item)
+                          }
+                        >
+                          More details🔽
+                        </button>
+                      </li>
+                    )
+                )}
             </ul>
           </section>
 
