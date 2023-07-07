@@ -13,6 +13,8 @@ import Loginx from "./Components/Loginx";
 import Profile from "./Components/Profile";
 import PersistAuth from "./Components/PersistAuth";
 import Instruct from "./Components/Instruct";
+import { Toaster } from "react-hot-toast";
+
 function App() {
   const [resdata, setResdata] = useState(null);
 
@@ -56,6 +58,7 @@ function App() {
         </Routes>
       </React.Suspense>
       <Footer />
+      <Toaster />
     </>
   );
 }

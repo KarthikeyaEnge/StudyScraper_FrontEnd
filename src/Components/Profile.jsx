@@ -3,7 +3,7 @@ import avatar from "../assets/male-avatar.gif";
 import { useAuth } from "../Context/AuthProvider";
 import { Navigate } from "react-router";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import toast from "react-hot-toast";
 import CryptoJS from "crypto-js";
 const items = [
   { id: "1", topic: "DSGT" },
@@ -28,6 +28,7 @@ const Profile = () => {
 
   const handlelogout = async (e) => {
     e.preventDefault();
+    toast.success("logged out");
     sessionStorage.removeItem("user");
     sessionStorage.removeItem("pass");
     sessionStorage.removeItem("userdata");

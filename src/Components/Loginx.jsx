@@ -4,12 +4,14 @@ import { useRef, useState } from "react";
 import CryptoJS from "crypto-js";
 import { Navigate } from "react-router";
 import { useAuth } from "../Context/AuthProvider";
-
+import toast from "react-hot-toast";
+import "react-toastify/dist/ReactToastify.css";
 const Loginx = () => {
   const user = useRef("");
   const pass = useRef("");
 
-  const { usr, setUsr } = useAuth();
+  const { usr, setUsr, setUserdata } = useAuth();
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -19,12 +21,18 @@ const Loginx = () => {
     };
     console.log(reqdata);
     const result = await axios.post("http://localhost:8081/setCred", reqdata);
+    if (result.status === 200) {
+      toast.success("Registration successfull");
+    } else {
+      toast.error("login failed");
+    }
     user.current.value = "";
     pass.current.value = "";
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
     const reqdata = {
       UserName: user.current.value,
       Password: pass.current.value,
@@ -36,6 +44,9 @@ const Loginx = () => {
     );
     if (result.status === 200) {
       console.log("validated");
+      toast.success("login successfull");
+
+      await delay(2000);
       const hashedpass = CryptoJS.AES.encrypt(
         pass.current.value,
         import.meta.env.VITE_PASS_KEY
@@ -43,7 +54,11 @@ const Loginx = () => {
       setUsr(user.current.value);
       sessionStorage.setItem("user", user.current.value);
       sessionStorage.setItem("pass", hashedpass);
-    } else console.log("error");
+    } else {
+      console.log("error");
+      toast.error(result.data.message);
+    }
+
     user.current.value = "";
     pass.current.value = "";
   };
@@ -66,12 +81,12 @@ const Loginx = () => {
                   required
                   ref={user}
                 />
-                {/* <label
-              htmlFor="exampleFormControlInput1"
-              class="pointer-events-none absolute left-3 top-1 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary bg-slate-900"
-            >
-              USERNAME
-            </label> */}
+                <label
+                  htmlFor="exampleFormControlInput1"
+                  class="pointer-events-none absolute left-3 top-1 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary bg-slate-900"
+                >
+                  USERNAME
+                </label>
               </div>
 
               <div class="relative mb-4" data-te-input-wrapper-init>
@@ -83,12 +98,12 @@ const Loginx = () => {
                   required
                   ref={pass}
                 />
-                {/*  <label
-              htmlFor="exampleFormControlInput11"
-              class="pointer-events-none absolute left-3 top-1 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary bg-slate-900"
-            >
-              PASSWORD
-            </label> */}
+                <label
+                  htmlFor="exampleFormControlInput11"
+                  class="pointer-events-none absolute left-3 top-1 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary bg-slate-900"
+                >
+                  PASSWORD
+                </label>
               </div>
 
               <div className="flex justify-center gap-5">
