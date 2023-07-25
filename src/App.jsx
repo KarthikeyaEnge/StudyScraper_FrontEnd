@@ -9,7 +9,7 @@ import Invalid from "./Components/Invalid";
 import Home from "./Components/Home";
 import ResultsX from "./Components/ResultsX";
 import Loading from "./Components/Loading";
-import Instruct from './Components/Instruct";
+import Instruct from "./Components/Instruct";
 function App() {
   const [resdata, setResdata] = useState(null);
 
