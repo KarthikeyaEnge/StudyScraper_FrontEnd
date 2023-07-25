@@ -20,7 +20,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             {/* Public Routes */}
             <Route index element={<Home />} />
-
+            <Route path="instructions" element={<Instruct />} />
             <Route
               path="scrape"
               element={<Scrape setResdata={setResdata} resdata={resdata} />}
