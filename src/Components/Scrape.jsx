@@ -44,11 +44,13 @@ const Scrape = ({ setResdata, resdata }) => {
   };
 
   const handleResults = async () => {
-    setIsloading(true);
-    sessionStorage.setItem("subject", subject);
-    const d = await getContent(image);
-    setResdata(d);
-    setIsloading(false);
+    if (image !== null) {
+      setIsloading(true);
+      sessionStorage.setItem("subject", subject);
+      const d = await getContent(image);
+      setResdata(d);
+      setIsloading(false);
+    }
   };
 
   return !isloading && resdata === null ? (
