@@ -13,7 +13,7 @@ import Loading from "./Loading";
 import Search from "./Search";
 import YouTube from "react-youtube";
 import getVid from "../controllers/getVid";
-
+import { useParams } from "react-router-dom";
 //sample data received from the server.
 /* let listx = {
   concepts: [
@@ -62,7 +62,7 @@ const ResultsX = ({ list = null }) => {
   const channelname = useRef("");
   const [rated, setRated] = useState(false);
   const width = useRef(window.innerWidth);
-
+  const { subject } = useParams();
   useEffect(() => {
     width.current = window.innerWidth;
   }, [, window.innerWidth]);
@@ -80,7 +80,7 @@ const ResultsX = ({ list = null }) => {
     setPlay(d);
     setIsloading(true);
     console.log(d);
-    const data = await getVid(d, cn, r);
+    const data = await getVid({ subject: subject, q: d }, cn, r);
     setVideo(data.id);
     setCon(data.content);
     setIsloading(false);
@@ -114,7 +114,7 @@ const ResultsX = ({ list = null }) => {
 
   return list ? (
     <main className=" min-h-screen lg:grid lg:grid-cols-4 bg-slate-900">
-      <section className="lg:max-h-fit bg-slate-900 lg:col-span-1 lg:overflow-y-scroll  lg:overflow-x-hidden text-center py-1 items-center flex flex-col scroll_bar">
+      <section className="lg:max-h-screen bg-slate-900 lg:col-span-1 lg:overflow-y-scroll  lg:overflow-x-hidden text-center py-1 items-center flex flex-col scroll_bar">
         <div className="flex flex-nowrap flex-row w-3/4 justify-between items-center my-3">
           <h3 className="text-lg text-sky-400 font-bold">Results</h3>
           <button
@@ -211,7 +211,7 @@ const ResultsX = ({ list = null }) => {
                 className="lg:w-auto lg:h-auto rounded-xl border-2 border-sky-800 overflow-hidden shadow-lg shadow-black"
               />
 
-              {con.intro && (
+              {con?.intro && (
                 <>
                   <h2 className="text-2xl text-sky-600 font-outfit underline mt-2">
                     Introduction
@@ -219,7 +219,7 @@ const ResultsX = ({ list = null }) => {
                   <p className="text-white font-nunito p-2 m-2">{con.intro}</p>
                 </>
               )}
-              {con.fullurl && (
+              {con?.fullurl && (
                 <a href={con.fullurl} target="_blank">
                   <button className="font-outfit text-xl bg-sky-600 hover:bg-sky-500 px-2 py-1 rounded-lg">
                     Need-more?
@@ -227,19 +227,19 @@ const ResultsX = ({ list = null }) => {
                 </a>
               )}
 
-              {con.ref && (
-                <section className="flex flex-col justify-center items-center rounded-lg border-2 border-sky-500 mx-3 my-4">
+              {con?.ref && (
+                <section className="relative flex flex-col justify-center items-center rounded-lg mx-3 my-4 lg:w-1/2">
                   <h1 className="text-sky-600 underline text-xl">References</h1>
-                  <ul className="text-center h-96 lg:w-auto w-80 p-2 overflow-y-scroll scroll_bar overflow-x-hidden">
+                  <ul className="text-center h-96 lg:w-auto w-80 p-2 overflow-y-scroll scroll_bar ">
                     {con.ref.map((item) => (
-                      <li key={item} className="my-4">
+                      <li key={item} className="my-4 p-2 overflow-x-hidden">
                         {" "}
                         <a
                           href={item}
                           target="_blank"
-                          className="font-outfit text-indigo-400 hover:text-indigo-300 hover:underline font-bold"
+                          className="font-outfit text-indigo-400 hover:text-indigo-300 hover:underline font-bold flex-wrap"
                         >
-                          {item}
+                          {item.slice(0, 45) + "...."}
                         </a>
                       </li>
                     ))}
